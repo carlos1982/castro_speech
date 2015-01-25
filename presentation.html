@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Content-Language" content="de" />
+	<link rel="stylesheet" type="text/css" href="slides.css">
+	<!--
+	I would recomed to download jquery. 
+	<script type="text/javascript" src="jquery.js"></script>
+	-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="slides.js"></script>
+	<script type="text/javascript">
+	<!--
+
+	var ressource_directory = 'assets/';
+
+	var slidenumber = 0;
+	var sc = null;
+
+	function show_slide(n) {
+		console.log('try to write content');
+		slide = slides[n];
+		if (slide != null) {
+			if (slide.bg != '') {
+				background = "url(" + ressource_directory + slide.bg + "')";	
+			}
+			else {
+				background = "none";	
+			}
+			
+
+			sc.html('<h1>' + slide.title + '</h1>');
+			
+			if(slide.content != null) {
+				sc.append(slide.content);
+			}
+
+			if(slide.video != null) {
+				if (slide.autoplay != null) {
+					autoplay = 'autoplay="autoplay"';
+				}
+				else {
+					autoplay = 'controls="controls"';
+				}
+				sc.append('<video width="320" height="240" '+autoplay+'><source src="'+ressource_directory+slide.video+'.ogg" type="video/ogg" /></video');
+			}
+
+			sc.css('background-image', background);
+			
+			sc.removeClass(sc.attr( "class" ));
+			sc.addClass('slide'+n);
+			sc.addClass(slide.css);
+
+			console.log(background);
+			console.log('...' + slide.content);
+			slidenumber = n;
+			setProgress(n);
+		}
+	}
+
+	function setProgress(n) {
+		 $('#progress').css('width', ((n+1) / count_slides) * 100 + '%');
+	}
+
+	function countProperties(obj) {
+    	var count = 0;
+
+    	for(var prop in obj) {
+        	if(obj.hasOwnProperty(prop))
+            	++count;
+    		}
+
+    	return count;
+	}
+
+	$(document).ready(function(){
+
+		count_slides = countProperties(slides);
+
+		sc = $('#slide-container');
+
+		$('#startbutton').click(function() {
+			toggleFullScreen();
+			show_slide(0);
+		});
+
+
+		var fs = document.getElementById("slide-container");
+
+		function toggleFullScreen() {
+			if (!document.mozFullScreen && !document.webkitFullScreen) {
+				if (fs.mozRequestFullScreen) {
+					fs.mozRequestFullScreen();
+				} else {
+					fs.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+				}
+			} else {
+				if (document.mozCancelFullScreen) {
+					document.mozCancelFullScreen();
+				} else {
+					document.webkitCancelFullScreen();
+				}
+			}
+		}
+
+		$("body").keydown(function(e) {
+			
+			if(e.key == 'Left') { // left
+				e.preventDefault();
+				if (slidenumber > 0) {
+					slidenumber--;
+					show_slide(slidenumber);
+				}
+			}
+			else if(e.key == 'Right') { // right
+				if (slidenumber < 9999) {
+					slidenumber++;
+					show_slide(slidenumber);
+				}
+				e.preventDefault();
+			}
+			console.log(e.key + '#' + slidenumber);
+		});
+
+		/*
+		While editing it is helpfull to automaticly reload the last slide,
+		or the 10th slide or what ever. Just uncomment one of the following lines:
+
+		show_slide(100);
+		show_slide(count_slides - 60);
+		show_slide(100);
+		show_slide(count_slides);
+		*/
+		$('body').append('<p>#' + count_slides + '</p>');
+
+	});
+	-->
+	</script>
+</head>
+<body>
+	<div id="slide-container">
+	
+		<a href="#" id="startbutton">Start Presentation</a>	
+
+	</div>
+	<div id="progressbar"><div id="progress"></div></div>
+
+	
+
+</body>
+</html>
