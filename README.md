@@ -7,7 +7,7 @@ After that create a directory where you put your Images and Videos.
 
 Finally you can edit the json-object in slides.js.
 
-Feel free to contribute to make it work in Chrome and Internet-Explorer.
+Feel free to contribute, and to make it work in Chrome and Internet-Explorer.
 
 Greetings,
 
